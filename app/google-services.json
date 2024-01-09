@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "659856498116",
+    "firebase_url": "https://ckmvvm-8dcc2-default-rtdb.firebaseio.com",
+    "project_id": "ckmvvm-8dcc2",
+    "storage_bucket": "ckmvvm-8dcc2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659856498116:android:5a9baf3b957bd7fed25891",
+        "android_client_info": {
+          "package_name": "com.example.ck_cmvvm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlBPRQUBzpkeAVCZ2haKj-djkx0_BElOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

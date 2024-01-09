@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/examButton"
+            app:layout_constraintBottom_toBottomOf="@id/examButton"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="10dp"
+            android:src="@drawable/arrow"
+            android:backgroundTint="@color/white"/>
+
+        <Button
+            android:id="@+id/calendarTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/wrongButton"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="학습 기록"
+            app:layout_constraintHorizontal_chainStyle="packed"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
+        android:id="@+id/calendarScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CalendarView
+                android:id="@+id/calendar"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/round_black"/>
+
+            <View
+                android:id="@+id/calendarUnderView"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/calendar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/easyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="쉬움 : "
+                app:layout_constraintTop_toBottomOf="@id/calendarUnderView"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"/>
+            <TextView
+                android:id="@+id/easyCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/easyTextView"
+                app:layout_constraintBottom_toBottomOf="@id/easyTextView"
+                app:layout_constraintStart_toEndOf="@id/easyTextView"
+                android:text="1개"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/normalTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/easyTextView"
+                app:layout_constraintBottom_toBottomOf="@id/easyTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/normalCount"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                android:text="보통 : "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginStart="20dp"/>
+            <TextView
+                android:id="@+id/normalCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/easyTextView"
+                app:layout_constraintBottom_toBottomOf="@+id/easyTextView"
+                app:layout_constraintStart_toEndOf="@id/normalTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="1개"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginEnd="20dp"/>
+
+            <TextView
+                android:id="@+id/hardTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/normalTextView"
+                app:layout_constraintBottom_toBottomOf="@id/normalTextView"
+                app:layout_constraintEnd_toStartOf="@id/hardCount"
+                android:text="어려움 : "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/hardCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/normalTextView"
+                app:layout_constraintBottom_toBottomOf="@id/normalTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="1개"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/hellTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/easyTextView"
+                app:layout_constraintTop_toBottomOf="@id/easyTextView"
+                app:layout_constraintEnd_toStartOf="@id/normalTextView"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:text="헬 : "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/hellCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/hellTextView"
+                app:layout_constraintTop_toTopOf="@id/hellTextView"
+                app:layout_constraintBottom_toBottomOf="@id/hellTextView"
+                android:text="1개"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/wrongTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/normalTextView"
+                app:layout_constraintEnd_toEndOf="@id/hardTextView"
+                app:layout_constraintTop_toTopOf="@id/hellTextView"
+                app:layout_constraintBottom_toBottomOf="@id/hellTextView"
+                android:text="틀린 문제 : "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/wrongCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/wrongTextView"
+                app:layout_constraintBottom_toBottomOf="@id/wrongTextView"
+                app:layout_constraintStart_toEndOf="@id/wrongTextView"
+                android:text="3개"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/calendarRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hellTextView"
+                android:background="@drawable/round_black"
+                android:layout_margin="20dp"/>
+
+            <TextView
+                android:id="@+id/totalStudyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/calendarRecyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/totalStudyTime"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                android:layout_marginTop="20dp"
+                android:text="총 학습한 시간 : "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/totalStudyTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/totalStudyTextView"
+                app:layout_constraintBottom_toBottomOf="@id/totalStudyTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/totalStudyTextView"
+                android:text="1시간 21분"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/deleteFloatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        android:src="@drawable/baseline_delete_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
