@@ -12,12 +12,11 @@ import kotlinx.parcelize.Parcelize
 @TypeConverters(RoomTypeConverters::class)
 data class SolutionEntity (
 
-    override val id: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0L,
     val number: String,
-    @PrimaryKey
     val title: String,
     val difficulty: String,
-    val type: String,
     val explan: String,
     val limit: String,
     val content: String,
@@ -28,7 +27,9 @@ data class SolutionEntity (
     val choice5: String,
     val correct: String,
     val comment: String,
+    val userChoice: String,
+    val time: Long,
+    val isCorrect: Boolean,
     val correctComment: String
 
-
-): com.example.ck_cmvvm.data.entity.Entity, Parcelable
+):  Parcelable

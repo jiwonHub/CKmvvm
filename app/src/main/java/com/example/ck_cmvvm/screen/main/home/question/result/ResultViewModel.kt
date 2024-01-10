@@ -2,17 +2,24 @@ package com.example.ck_cmvvm.screen.main.home.question.result
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.ck_cmvvm.data.DBKey.Companion.DB_PER
 import com.example.ck_cmvvm.data.DBKey.Companion.DB_RANK
+import com.example.ck_cmvvm.data.entity.solution.SolutionEntity
 import com.example.ck_cmvvm.data.repository.SharedPreferencesRepository
+import com.example.ck_cmvvm.data.repository.solution.SolutionRepository
+import com.example.ck_cmvvm.model.solution.SolutionModel
 import com.example.ck_cmvvm.screen.base.BaseViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
-class ResultViewModel: BaseViewModel() {
+class ResultViewModel(
+    private val solutionRepository: SolutionRepository
+): BaseViewModel() {
 
     private val _userScore = MutableLiveData<Int>()
     val userScore: LiveData<Int> = _userScore
@@ -65,6 +72,32 @@ class ResultViewModel: BaseViewModel() {
             }
 
         })
+    }
+
+    fun saveSolution(model: SolutionModel, userChoice: String, time: Long, isCorrect: Boolean){
+        viewModelScope.launch {
+            val solutionEntity = SolutionEntity(
+                id = time,
+                number = model.number,
+                title = model.title,
+                difficulty = model.difficulty,
+                explan = model.explan,
+                limit = model.limit,
+                content = model.content,
+                choice1 = model.choice1,
+                choice2 = model.choice2,
+                choice3 = model.choice3,
+                choice4 = model.choice4,
+                choice5 = model.choice5,
+                correct = model.correct,
+                comment = model.comment,
+                userChoice = userChoice,
+                time = time,
+                isCorrect = isCorrect,
+                correctComment = model.correctComment
+            )
+            solutionRepository.insertSolution(solutionEntity)
+        }
     }
 
     private fun calculateNewScore(currentScore: Int, isCorrect: Boolean, difficulty: String): Int {

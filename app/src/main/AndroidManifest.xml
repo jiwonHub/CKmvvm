@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:name=".CKApplication"
@@ -46,6 +49,9 @@
         <activity android:name=".screen.main.home.question.compilation.QuestionCompilationActivity"/>
         <activity android:name=".screen.main.home.question.solving.SolvingActivity"/>
         <activity android:name=".screen.main.home.question.result.ResultActivity"/>
+        <activity android:name=".screen.community.CommunityActivity"/>
+        <activity android:name=".screen.community.create.CreateCommunityActivity"/>
+        <activity android:name=".screen.community.detail.CommunityDetailActivity"/>
     </application>
 
 </manifest>

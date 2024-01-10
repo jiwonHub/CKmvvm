@@ -7,6 +7,7 @@ import com.example.ck_cmvvm.data.repository.SharedPreferencesRepository
 import com.example.ck_cmvvm.databinding.ActivityResultBinding
 import com.example.ck_cmvvm.model.solution.SolutionModel
 import com.example.ck_cmvvm.screen.base.BaseActivity
+import com.example.ck_cmvvm.screen.community.CommunityActivity
 import com.example.ck_cmvvm.screen.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,6 +38,8 @@ class ResultActivity: BaseActivity<ResultViewModel, ActivityResultBinding>() {
 
         val questionModelField = intent.getStringArrayListExtra("questionModelFields")
         val isCorrect = intent.getBooleanExtra("isCorrect", false)
+        val userChoice = intent.getStringExtra("userChoice")
+        val time = System.currentTimeMillis()
 
         if (isCorrect){
             konfettiView.isVisible = true
@@ -68,6 +71,12 @@ class ResultActivity: BaseActivity<ResultViewModel, ActivityResultBinding>() {
             questionTitle.text = questionModel.title
             viewModel.fetchAndUpdateScore(userInfo.userId.toString(), userInfo.userName.toString(), isCorrect, questionModel.difficulty)
             viewModel.fetchAndUpdatePercent(questionModel.number, isCorrect)
+            viewModel.saveSolution(questionModel, userChoice!!, time, isCorrect)
+        }
+
+        communityButton.setOnClickListener {
+            val intent = Intent(this@ResultActivity, CommunityActivity::class.java)
+            startActivity(intent)
         }
 
         homeButton.setOnClickListener {

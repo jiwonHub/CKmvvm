@@ -15,4 +15,10 @@ interface SolutionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(SolutionEntity: SolutionEntity)
 
+    @Query("SELECT * FROM SolutionEntity WHERE time BETWEEN :dayStart AND :dayEnd")
+    suspend fun getSolutionForDay(dayStart: Long, dayEnd: Long): List<SolutionEntity>
+
+    @Query("SELECT * FROM SolutionEntity WHERE isCorrect = 0")
+    suspend fun getSolutionWrong(): List<SolutionEntity>
+
 }

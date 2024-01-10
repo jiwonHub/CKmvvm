@@ -31,7 +31,6 @@ class SolvingActivity: BaseActivity<SolvingViewModel, ActivityChoiceSolutionBind
     override fun initViews() = with(binding) {
         super.initViews()
 
-
         val questionModelField = intent.getStringArrayListExtra("questionModelFields")
         if (questionModelField != null){
               val questionModel = SolutionModel(
@@ -67,14 +66,14 @@ class SolvingActivity: BaseActivity<SolvingViewModel, ActivityChoiceSolutionBind
             choices.forEachIndexed { index, button ->
                 button.setOnClickListener {
                     val isCorrect = checkAnswer(questionModel.correct, "choice${index + 1}")
-                    goToResultActivity(questionModel, isCorrect)
+                    goToResultActivity(questionModel, isCorrect, "choice${index + 1}")
                 }
             }
         }
 
     }
 
-    private fun goToResultActivity(model: SolutionModel, isCorrect: Boolean){
+    private fun goToResultActivity(model: SolutionModel, isCorrect: Boolean, userChoice: String){
         val intent = Intent(this@SolvingActivity, ResultActivity::class.java)
         val questionModelFields = listOf(
             model.number,
@@ -94,6 +93,7 @@ class SolvingActivity: BaseActivity<SolvingViewModel, ActivityChoiceSolutionBind
         )
         intent.putStringArrayListExtra("questionModelFields", ArrayList(questionModelFields))
         intent.putExtra("isCorrect", isCorrect)
+        intent.putExtra("userChoice", userChoice)
         startActivity(intent)
     }
 

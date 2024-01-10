@@ -111,6 +111,17 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/communityButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:background="@drawable/rectangle_black"
+                android:text="게시판"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="50dp"/>
