@@ -11,9 +11,11 @@ import com.example.ck_cmvvm.screen.main.calendar.CalendarViewModel
 import com.example.ck_cmvvm.screen.main.home.HomeViewModel
 import com.example.ck_cmvvm.screen.main.home.question.QuestionViewModel
 import com.example.ck_cmvvm.screen.main.home.question.compilation.QuestionCompilationViewModel
+import com.example.ck_cmvvm.screen.main.home.question.rank.RankViewModel
 import com.example.ck_cmvvm.screen.main.home.question.result.ResultViewModel
 import com.example.ck_cmvvm.screen.main.home.question.solving.SolvingViewModel
 import com.example.ck_cmvvm.screen.main.home.wrong.WrongViewModel
+import com.example.ck_cmvvm.screen.main.home.wrong.detail.WrongDetailViewModel
 import com.example.ck_cmvvm.screen.main.summary.SummaryViewModel
 import com.example.ck_cmvvm.util.provider.DefaultResourceProvider
 import com.example.ck_cmvvm.util.provider.ResourcesProvider
@@ -37,6 +39,8 @@ val appModule = module {
     viewModel { CommunityViewModel() }
     viewModel { CreateCommunityViewModel() }
     viewModel { CommunityDetailViewModel() }
+    viewModel { WrongDetailViewModel() }
+    viewModel { RankViewModel() }
 
     single<SolutionRepository> { DefaultSolutionRepository(get(), get()) }
 

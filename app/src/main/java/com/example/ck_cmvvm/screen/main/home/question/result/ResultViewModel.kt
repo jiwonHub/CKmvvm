@@ -105,12 +105,16 @@ class ResultViewModel(
             when (difficulty) {
                 "쉬움" -> currentScore + 10
                 "보통" -> currentScore + 15
+                "어려움" -> currentScore + 25
+                "매우 어려움" -> currentScore + 45
                 else -> currentScore
             }
         } else {
             when (difficulty) {
                 "쉬움" -> currentScore - 5
-                "보통" -> currentScore - 5
+                "보통" -> currentScore - 10
+                "어려움" -> currentScore - 10
+                "매우 어려움" -> currentScore - 25
                 else -> currentScore
             }
         }

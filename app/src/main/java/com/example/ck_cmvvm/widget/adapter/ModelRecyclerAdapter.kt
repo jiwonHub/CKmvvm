@@ -37,7 +37,9 @@ class ModelRecyclerAdapter<VM: BaseViewModel>(
         return when(modelList[position].difficulty){
             "쉬움" -> 0
             "보통" -> 1
-            else -> 2
+            "어려움" -> 2
+            "매우 어려움" -> 3
+            else -> 4
         }
     }
 

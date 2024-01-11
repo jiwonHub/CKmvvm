@@ -51,6 +51,8 @@
         <activity android:name=".screen.community.CommunityActivity"/>
         <activity android:name=".screen.community.create.CreateCommunityActivity"/>
         <activity android:name=".screen.community.detail.CommunityDetailActivity"/>
+        <activity android:name=".screen.main.home.wrong.detail.WrongDetailActivity"/>
+        <activity android:name=".screen.main.home.question.rank.RankActivity"/>
     </application>
 
 </manifest>

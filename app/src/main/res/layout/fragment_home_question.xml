@@ -50,33 +50,20 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     tools:text="최지원"/>
-
-                <TextView
-                    android:id="@+id/myLayoutCorrectCount"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rankButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/myLayoutWrongCount"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="10dp"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    tools:text="맞춘 문제 수 : 1개"/>
-                <TextView
-                    android:id="@+id/myLayoutWrongCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/myLayoutCorrectCount"
-                    app:layout_constraintEnd_toEndOf="@id/myLayoutCorrectCount"
-                    app:layout_constraintTop_toBottomOf="@id/myLayoutCorrectCount"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/round_fill_black"
+                    android:text="랭킹"
                     android:textSize="20dp"
-                    android:textStyle="bold"
-                    tools:text="틀린 문제 수 : 1개"/>
+                    android:textColor="@color/white"
+                    android:textStyle="bold"/>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

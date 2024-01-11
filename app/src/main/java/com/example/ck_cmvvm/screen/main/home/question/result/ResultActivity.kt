@@ -26,7 +26,7 @@ class ResultActivity: BaseActivity<ResultViewModel, ActivityResultBinding>() {
             binding.score.text = "점수: $score"
         }
         viewModel.scoreChange.observe(this) { change ->
-            val changeText = if (change >= 0) "(+$change)" else "(-$change)"
+            val changeText = if (change >= 0) "(+$change)" else "($change)"
             binding.scoreChange.text = changeText
         }
     }

@@ -29,6 +29,8 @@ class CustomPagerAdapter(private val context: Context, private val items: List<P
             when(position){
                 0 -> intent.putExtra("difficulty", "쉬움")
                 1 -> intent.putExtra("difficulty", "보통")
+                2 -> intent.putExtra("difficulty", "어려움")
+                3 -> intent.putExtra("difficulty", "매우 어려움")
             }
             context.startActivity(intent)
         }

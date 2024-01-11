@@ -7,6 +7,7 @@ import com.example.ck_cmvvm.data.repository.SharedPreferencesRepository
 import com.example.ck_cmvvm.databinding.FragmentHomeQuestionBinding
 import com.example.ck_cmvvm.screen.base.BaseFragment
 import com.example.ck_cmvvm.screen.community.CommunityActivity
+import com.example.ck_cmvvm.screen.main.home.question.rank.RankActivity
 import com.example.ck_cmvvm.widget.adapter.CustomPagerAdapter
 import com.example.ck_cmvvm.widget.adapter.PageItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,6 +46,10 @@ class QuestionFragment: BaseFragment<QuestionViewModel, FragmentHomeQuestionBind
 
         communityButton.setOnClickListener {
             val intent = Intent(requireActivity(), CommunityActivity::class.java)
+            startActivity(intent)
+        }
+        rankButton.setOnClickListener {
+            val intent = Intent(requireContext(), RankActivity::class.java)
             startActivity(intent)
         }
     }

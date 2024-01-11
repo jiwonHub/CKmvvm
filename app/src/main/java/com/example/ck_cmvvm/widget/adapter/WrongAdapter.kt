@@ -11,10 +11,12 @@ import com.example.ck_cmvvm.model.solution.PercentModel
 
 
 class WrongAdapter(
-    private val onNumberFetched: (String) -> Unit
+    private val onNumberFetched: (String) -> Unit,
+    private val onClickedItem: (SolutionEntity, Map<String, PercentModel>) -> Unit
 ): ListAdapter<SolutionEntity, WrongAdapter.ViewHolder>(DiffUtil) {
 
     private var percentData: Map<String, PercentModel>? = null
+    private var isClick: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WrongAdapter.ViewHolder {
         val binding = ViewholderWrongBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -42,6 +44,10 @@ class WrongAdapter(
                 0.0
             }
             correctPer.text = "$percent%"
+            root.isClickable = isClick
+            root.setOnClickListener {
+                onClickedItem(item, percentData!!)
+            }
         }
     }
 
@@ -65,6 +71,11 @@ class WrongAdapter(
 
     fun setPercentData(data: Map<String, PercentModel>) {
         percentData = data
+        notifyDataSetChanged()
+    }
+
+    fun setClickable(clickable: Boolean){
+        isClick = clickable
         notifyDataSetChanged()
     }
 }
