@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -61,19 +62,20 @@ class CreateCommunityActivity: BaseActivity<CreateCommunityViewModel, ActivityCo
             when{
                 ContextCompat.checkSelfPermission(
                     this@CreateCommunityActivity,
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                    android.Manifest.permission.READ_MEDIA_IMAGES
                 ) == PackageManager.PERMISSION_GRANTED -> {
                     startContentProvider()
                 }
 
-                shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE) -> {
+                shouldShowRequestPermissionRationale(android.Manifest.permission.READ_MEDIA_IMAGES) -> {
                     showPermissionContextPopup()
                 }
 
                 else -> {
-                    requestPermissions(
-                        arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-                        1010
+                    ActivityCompat.requestPermissions(
+                        this@CreateCommunityActivity,
+                        arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES),
+                        PERMISSION_REQUEST_CODE
                     )
                 }
             }
@@ -85,7 +87,11 @@ class CreateCommunityActivity: BaseActivity<CreateCommunityViewModel, ActivityCo
             val time = System.currentTimeMillis()
             val name = userInfo.userName
 
-            viewModel.uploadCommunity(title, content, selectedUri.toString(), time, name!!)
+            selectedUri?.let { uri ->
+                viewModel.uploadImageToFirebaseStorage(uri, title, content, time, name!!)
+            } ?: run {
+                // 선택된 이미지가 없을 때의 처리
+            }
         }
 
         binding.backButton.setOnClickListener {
@@ -101,8 +107,8 @@ class CreateCommunityActivity: BaseActivity<CreateCommunityViewModel, ActivityCo
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         when (requestCode) { // 요청할 때 보낸 코드가 1010이면
-            1010 ->
-                if (grantResults.isNotEmpty()) { // 요청 결과에 ok가 있다면
+            PERMISSION_REQUEST_CODE ->
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) { // 요청 결과에 ok가 있다면
                     startContentProvider() // 갤러리 실행
                 } else { // 요청 결과에 ok가 없다면
                     Toast.makeText(this, "권한을 거부하셨습니다.", Toast.LENGTH_SHORT).show()
@@ -111,33 +117,35 @@ class CreateCommunityActivity: BaseActivity<CreateCommunityViewModel, ActivityCo
     }
 
     @Deprecated("Deprecated in Java")
-    override fun onActivityResult( // 갤러리 실행 후 결과를 체크하는 함수
-        requestCode: Int, // 갤러리 실행 시 보낸 코드
-        resultCode: Int,  // 사진 가져오기가 성공 시 갖는 코드
-        data: Intent?     // 사진
-    ) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode != Activity.RESULT_OK) { // 성공하지 못했다면
-            return
-        }
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                REQUEST_CODE_PICK_IMAGE -> {
+                    data?.data?.let { uri ->
+                        // 사용자가 선택한 이미지의 URI에 대한 지속적인 접근 권한을 요청
+                        try {
+                            contentResolver.takePersistableUriPermission(
+                                uri,
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                            )
+                        } catch (e: SecurityException) {
+                            // 권한 요청 실패 처리
+                            Toast.makeText(this, "권한 요청 실패", Toast.LENGTH_SHORT).show()
+                        }
 
-        when (requestCode) {
-            2020 -> {
-                data?.data?.let { uri ->
-                    contentResolver.takePersistableUriPermission(
-                        uri,
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    )
-                    binding.photoImageView.setImageURI(uri)
-                    selectedUri = uri
-                } ?: run {
-                    Toast.makeText(this, "사진을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
+                        // 이미지를 화면에 표시
+                        binding.photoImageView.setImageURI(uri)
+                        selectedUri = uri
+                    } ?: run {
+                        Toast.makeText(this, "사진을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
+                    }
                 }
+                // ... 기타 다른 requestCode 처리 ...
             }
-            else -> {
-                Toast.makeText(this, "사진을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
-            }
+        } else {
+            Toast.makeText(this, "사진을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -147,16 +155,15 @@ class CreateCommunityActivity: BaseActivity<CreateCommunityViewModel, ActivityCo
             type = "image/*"
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
         }
-        startActivityForResult(intent, 2020)
+        startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
     }
-
     @RequiresApi(Build.VERSION_CODES.M)
     private fun showPermissionContextPopup() { // 권한 동의x 를 누른 후 띄워지는 팝업
         AlertDialog.Builder(this)
             .setTitle("권한이 필요합니다.")
             .setMessage("사진을 가져오기 위해 필요합니다.")
             .setPositiveButton("동의") { _, _ ->
-                requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1010)
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES), PERMISSION_REQUEST_CODE)
             }
             .create()
             .show()
@@ -168,5 +175,10 @@ class CreateCommunityActivity: BaseActivity<CreateCommunityViewModel, ActivityCo
 
     private fun hideProgress() { // 로딩창 x
         binding.progressBar.isGone = true
+    }
+
+    companion object{
+        const val PERMISSION_REQUEST_CODE = 1010
+        private const val REQUEST_CODE_PICK_IMAGE = 2020
     }
 }

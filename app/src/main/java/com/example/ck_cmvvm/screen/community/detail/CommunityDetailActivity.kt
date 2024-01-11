@@ -53,6 +53,7 @@ class CommunityDetailActivity: BaseActivity<CommunityDetailViewModel, ActivityCo
         contentTextView.text = content
         Glide.with(imageView)
             .load(uri)
+            .centerCrop()
             .into(imageView)
         dateTextView.text = postDate.format(data)
         timeTextView.text = postTime.format(data)

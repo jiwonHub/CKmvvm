@@ -18,45 +18,32 @@ class CreateCommunityViewModel: BaseViewModel() {
     private val _uploadUriState = MutableLiveData<UploadUriState>(UploadUriState.UnUninitialized)
     val uploadUriState: LiveData<UploadUriState> = _uploadUriState
 
-    private fun uploadPhoto(
-        uri: Uri,
-    ){
-        val fileName = "${System.currentTimeMillis()}.png"
-        val storage: FirebaseStorage = Firebase.storage
+    fun uploadImageToFirebaseStorage(imageUri: Uri, title: String, content: String, time: Long, name: String) {
+        val fileName = "images/${System.currentTimeMillis()}.jpg"
+        val storageReference = FirebaseStorage.getInstance().getReference(fileName)
+
         _uploadUriState.value = UploadUriState.Loading
-        storage.reference.child("community/photo").child(fileName)
-            .putFile(uri)
-            .addOnCompleteListener {
-                if (it.isSuccessful){
-                    storage.reference.child("community/photo").child(fileName)
-                        .downloadUrl
-                        .addOnSuccessListener {
-                            _uploadUriState.value = UploadUriState.Success
-                        }
-                        .addOnFailureListener {
-                            _uploadUriState.value = UploadUriState.Error
-                        }
-                }
+        storageReference.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
+            taskSnapshot.metadata?.reference?.downloadUrl?.addOnSuccessListener { downloadUrl ->
+                uploadCommunity(title, content, downloadUrl.toString(), time, name)
+                _uploadUriState.value = UploadUriState.Success
             }
+        }.addOnFailureListener {
+            // 업로드 실패 처리
+            _uploadUriState.value = UploadUriState.Error
+        }
     }
 
-    fun uploadCommunity( // 게시글 업로드 함수
-        title: String,      // 제목
-        content: String,    // 내용
-        imageUri: String,   // 사진 uri
-        time: Long,
-        name: String
-    ) { // 게시글 업로드
-        uploadPhoto(imageUri.toUri())
+    private fun uploadCommunity(title: String, content: String, imageUri: String, time: Long, name: String) {
         val model = CommunityModel(
             title,
             content,
             imageUri,
             time,
             name
-        ) // 게시글 데이터 형식으로 받아온 값들을 model에 저장
+        )
         val communityDB = FirebaseDatabase.getInstance().reference.child(DB_COMMUNITY)
-        communityDB.push().setValue(model) // 최종적으로 DB에 푸쉬
+        communityDB.push().setValue(model)
     }
 
 }
