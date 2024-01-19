@@ -78,6 +78,9 @@ class QuestionCompilationActivity: BaseActivity<QuestionCompilationViewModel, Ac
         when(selectedDifficulty){
             "쉬움" -> {compilationTitle.text = "쉬움 문제 모음"}
             "보통" -> {compilationTitle.text = "보통 문제 모음"}
+            "어려움" -> {compilationTitle.text = "어려움 문제 모음"}
+            "매우 어려움" -> {compilationTitle.text = "매우 어려움 문제 모음"}
+
         }
 
         backButton.setOnClickListener {

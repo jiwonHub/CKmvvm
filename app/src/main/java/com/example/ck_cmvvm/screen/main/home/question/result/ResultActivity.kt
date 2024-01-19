@@ -3,6 +3,8 @@ package com.example.ck_cmvvm.screen.main.home.question.result
 import android.content.Intent
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import com.example.ck_cmvvm.Presets
+import com.example.ck_cmvvm.R
 import com.example.ck_cmvvm.data.repository.SharedPreferencesRepository
 import com.example.ck_cmvvm.databinding.ActivityResultBinding
 import com.example.ck_cmvvm.model.solution.SolutionModel
@@ -43,9 +45,12 @@ class ResultActivity: BaseActivity<ResultViewModel, ActivityResultBinding>() {
 
         if (isCorrect){
             konfettiView.isVisible = true
+            konfettiView.start(Presets.parade())
+            isCorrectImage.setImageResource(R.drawable.success)
             resultTextView.text = "정답입니다!"
         }else{
             konfettiView.isGone = true
+            isCorrectImage.setImageResource(R.drawable.fail)
             resultTextView.text = "틀렸습니다 ㅜㅜ"
         }
 

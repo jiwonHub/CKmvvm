@@ -27,8 +27,9 @@ class HardViewHolder(
         } else {
             0.0
         }
+        val formattedPercent = String.format("%.2f", percent)
 
         QuestionTitle.text = model.title
-        questionPercent.text = "$percent%"
+        questionPercent.text = "$formattedPercent%"
     }
 }

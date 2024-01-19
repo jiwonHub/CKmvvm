@@ -43,7 +43,8 @@ class WrongAdapter(
             } else {
                 0.0
             }
-            correctPer.text = "$percent%"
+            val formattedPercent = String.format("%.2f", percent)
+            correctPer.text = "$formattedPercent%"
             root.isClickable = isClick
             root.setOnClickListener {
                 onClickedItem(item, percentData!!)

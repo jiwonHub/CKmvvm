@@ -43,12 +43,12 @@ class WrongDetailActivity: BaseActivity<WrongDetailViewModel, ActivityWrongDetai
         } else {
             0.0
         }
-        Log.d("total", percent.toString())
+        val formattedPercent = String.format("%.2f", percent)
 
         setColor(correct!!, userChoice!!)
 
         questionNumber.text = number
-        answerPercentage.text = "$percent%"
+        answerPercentage.text = "$formattedPercent%"
         SolutionTitle.text = title
         SolutionDifficulty.text = difficulty
         explanationTextView.text = explan

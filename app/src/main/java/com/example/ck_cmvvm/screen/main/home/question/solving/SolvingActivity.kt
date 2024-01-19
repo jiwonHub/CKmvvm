@@ -24,7 +24,8 @@ class SolvingActivity: BaseActivity<SolvingViewModel, ActivityChoiceSolutionBind
             } else {
                 0.0
             }
-            answerPercentage.text = "$percent%"
+            val formattedPercent = String.format("%.2f", percent)
+            answerPercentage.text = "$formattedPercent%"
         })
     }
 

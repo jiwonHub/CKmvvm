@@ -104,6 +104,16 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="30dp"/>
 
+    <ImageView
+        android:id="@+id/isCorrectImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="30dp"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/communityButton"
         android:layout_width="150dp"
