@@ -1,6 +1,7 @@
 package com.example.ck_cmvvm.screen.main.home.question.compilation
 
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ck_cmvvm.databinding.ActivityEasyQuestionCompilationBinding
@@ -56,6 +57,8 @@ class QuestionCompilationActivity: BaseActivity<QuestionCompilationViewModel, Ac
     override fun observeData() {
         viewModel.easyQuestionLiveData.observe(this, Observer { questions ->
             adapter.submitList(questions)
+            viewModel.fetchData()
+            Log.d("logggg", questions.toString())
             questions.forEach { question ->
                 viewModel.fetchPercent(question.number)
             }
@@ -80,7 +83,6 @@ class QuestionCompilationActivity: BaseActivity<QuestionCompilationViewModel, Ac
             "보통" -> {compilationTitle.text = "보통 문제 모음"}
             "어려움" -> {compilationTitle.text = "어려움 문제 모음"}
             "매우 어려움" -> {compilationTitle.text = "매우 어려움 문제 모음"}
-
         }
 
         backButton.setOnClickListener {

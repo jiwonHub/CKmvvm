@@ -22,4 +22,8 @@ class CalendarViewModel(
             _solutionsForDay.value = solutions
         }
     }
+
+    fun deleteAllSolution() = viewModelScope.launch{
+        solutionRepository.deleteAllSolution()
+    }
 }

@@ -21,4 +21,7 @@ interface SolutionDao {
     @Query("SELECT * FROM SolutionEntity WHERE isCorrect = 0")
     suspend fun getSolutionWrong(): List<SolutionEntity>
 
+    @Query("DELETE FROM SolutionEntity")
+    suspend fun deleteAllSolution()
+
 }

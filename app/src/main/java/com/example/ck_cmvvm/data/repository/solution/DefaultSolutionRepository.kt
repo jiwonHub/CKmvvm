@@ -24,4 +24,8 @@ class DefaultSolutionRepository(
     override suspend fun getSolutionWrong(): List<SolutionEntity> = withContext(ioDispatcher){
         solutionDao.getSolutionWrong()
     }
+
+    override suspend fun deleteAllSolution() = withContext(ioDispatcher) {
+        solutionDao.deleteAllSolution()
+    }
 }

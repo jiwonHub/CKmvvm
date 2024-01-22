@@ -54,17 +54,6 @@
             android:textStyle="bold"
             android:text="오답 노트"/>
 
-        <ImageButton
-            android:id="@+id/userButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/user"
-            android:background="@color/white"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="20dp"/>
-
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout

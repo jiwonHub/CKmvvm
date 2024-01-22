@@ -27,6 +27,8 @@ class CalendarFragment: BaseFragment<CalendarViewModel, FragmentCalendarBinding>
         calendarRecyclerView.adapter = adapter
 
         val today = Calendar.getInstance()
+        val dialog = CalendarCustomDialog(requireContext(), viewModel)
+        dialog.setCanceledOnTouchOutside(true)
 
         // 현재 날짜에 해당하는 문제들을 가져오기 위해 fetchSolutionsForDay 호출
         val dayStart = today.apply {
@@ -53,6 +55,10 @@ class CalendarFragment: BaseFragment<CalendarViewModel, FragmentCalendarBinding>
             viewModel.solutionsForDay.observe(viewLifecycleOwner) { solutions ->
                 adapter.submitList(solutions)
             }
+        }
+
+        deleteFloatButton.setOnClickListener {
+            dialog.show()
         }
     }
 

@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface SolutionService {
 
-    @GET("/v3/414b7be7-d957-4ad8-b27f-fb0ad07f19d4")
+    @GET("/v3/c4ce6bc1-e713-4aa4-96fd-bce579fcacbd")
     fun listQuestions(): Call<EasyDTO>
 
 }
