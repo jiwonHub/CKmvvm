@@ -6,7 +6,7 @@ import android.view.Window
 import android.widget.Toast
 import com.example.ck_cmvvm.databinding.DialogCalendarBinding
 
-class CalendarCustomDialog(context: Context, viewModel: CalendarViewModel): Dialog(context) {
+class CalendarCustomDialog(context: Context, viewModel: CalendarViewModel, dayStart: Long, dayEnd: Long): Dialog(context) {
 
     private lateinit var binding: DialogCalendarBinding
 
@@ -15,7 +15,7 @@ class CalendarCustomDialog(context: Context, viewModel: CalendarViewModel): Dial
         setContentView(binding.root)
 
         binding.confirmButton.setOnClickListener {
-            viewModel.deleteAllSolution()
+            viewModel.deleteAllSolution(dayStart, dayEnd)
             Toast.makeText(context, "삭제 성공!", Toast.LENGTH_SHORT).show()
             dismiss()
         }

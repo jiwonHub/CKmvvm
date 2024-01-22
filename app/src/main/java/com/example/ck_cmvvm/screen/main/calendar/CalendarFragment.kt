@@ -11,6 +11,8 @@ import java.util.Calendar
 class CalendarFragment: BaseFragment<CalendarViewModel, FragmentCalendarBinding>() {
 
     private val adapter = CalendarAdapter()
+    var startTime: Long = 0
+    var endTime: Long = 0
 
     override val viewModel by viewModel<CalendarViewModel>()
 
@@ -27,7 +29,7 @@ class CalendarFragment: BaseFragment<CalendarViewModel, FragmentCalendarBinding>
         calendarRecyclerView.adapter = adapter
 
         val today = Calendar.getInstance()
-        val dialog = CalendarCustomDialog(requireContext(), viewModel)
+        val dialog = CalendarCustomDialog(requireContext(), viewModel, startTime, endTime)
         dialog.setCanceledOnTouchOutside(true)
 
         // 현재 날짜에 해당하는 문제들을 가져오기 위해 fetchSolutionsForDay 호출
@@ -79,6 +81,9 @@ class CalendarFragment: BaseFragment<CalendarViewModel, FragmentCalendarBinding>
         calendar.set(Calendar.MINUTE, 59)
         calendar.set(Calendar.SECOND, 59)
         val dayEnd = calendar.timeInMillis
+
+        startTime = dayStart
+        endTime = dayEnd
 
         viewModel.fetchSolutionsForDay(dayStart, dayEnd)
     }

@@ -12,6 +12,6 @@ interface SolutionRepository {
 
     suspend fun getSolutionWrong(): List<SolutionEntity>
 
-    suspend fun deleteAllSolution()
+    suspend fun deleteAllSolution(dayStart: Long, dayEnd: Long)
 
 }

@@ -23,7 +23,7 @@ class CalendarViewModel(
         }
     }
 
-    fun deleteAllSolution() = viewModelScope.launch{
-        solutionRepository.deleteAllSolution()
+    fun deleteAllSolution(dayStart: Long, dayEnd: Long) = viewModelScope.launch{
+        solutionRepository.deleteAllSolution(dayStart, dayEnd)
     }
 }

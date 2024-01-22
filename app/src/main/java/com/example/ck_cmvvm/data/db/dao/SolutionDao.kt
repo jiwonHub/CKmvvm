@@ -21,7 +21,7 @@ interface SolutionDao {
     @Query("SELECT * FROM SolutionEntity WHERE isCorrect = 0")
     suspend fun getSolutionWrong(): List<SolutionEntity>
 
-    @Query("DELETE FROM SolutionEntity")
-    suspend fun deleteAllSolution()
+    @Query("DELETE FROM SolutionEntity WHERE time BETWEEN :dayStart AND :dayEnd")
+    suspend fun deleteAllSolution(dayStart: Long, dayEnd: Long)
 
 }

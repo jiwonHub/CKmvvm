@@ -25,7 +25,7 @@ class DefaultSolutionRepository(
         solutionDao.getSolutionWrong()
     }
 
-    override suspend fun deleteAllSolution() = withContext(ioDispatcher) {
-        solutionDao.deleteAllSolution()
+    override suspend fun deleteAllSolution(dayStart: Long, dayEnd: Long) = withContext(ioDispatcher) {
+        solutionDao.deleteAllSolution(dayStart, dayEnd)
     }
 }
