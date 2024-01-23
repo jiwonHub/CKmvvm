@@ -5,7 +5,6 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/blue</item>
-        <item name="colorSecondary">@color/red</item>
     </style>
 
     <style name="Theme.CK_cmvvm" parent="Base.Theme.CK_cmvvm" />

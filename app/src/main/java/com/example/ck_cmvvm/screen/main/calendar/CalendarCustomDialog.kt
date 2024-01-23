@@ -12,14 +12,16 @@ class CalendarCustomDialog(context: Context, viewModel: CalendarViewModel, daySt
 
     init {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
+        binding = DialogCalendarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.confirmButton.setOnClickListener {
+        binding.cancelButton.setOnClickListener {
             viewModel.deleteAllSolution(dayStart, dayEnd)
+            viewModel.fetchData()
             Toast.makeText(context, "삭제 성공!", Toast.LENGTH_SHORT).show()
             dismiss()
         }
-        binding.cancelButton.setOnClickListener {
+        binding.confirmButton.setOnClickListener {
             Toast.makeText(context, "삭제 취소", Toast.LENGTH_SHORT).show()
             dismiss()
         }
