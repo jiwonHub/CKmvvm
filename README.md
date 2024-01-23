@@ -22,4 +22,4 @@
 
 ## 스크린샷
 
-  
+![ck1](https://github.com/jiwonHub/CKmvvm/assets/118645166/8576a241-6b83-4ced-b650-967e458e0f3f)
