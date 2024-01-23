@@ -23,3 +23,5 @@
 ## 스크린샷
 
 ![ck1](https://github.com/jiwonHub/CKmvvm/assets/118645166/8576a241-6b83-4ced-b650-967e458e0f3f)
+![ck2](https://github.com/jiwonHub/CKmvvm/assets/118645166/9cfa2e24-c39e-4444-a715-38cfd214fdbc)
+![ck3](https://github.com/jiwonHub/CKmvvm/assets/118645166/9308d632-03c1-4cc5-b331-daec1cd365d6)
